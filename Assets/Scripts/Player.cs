@@ -16,11 +16,14 @@ public class Player : MonoBehaviour
 
     private Animator animator;
 
+    private Vector2 initialPosition;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        initialPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -29,11 +32,11 @@ public class Player : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal") * speed;
         if(horizontal < 0.0f)
         {
-            transform.localScale = new Vector2(-20.0f, 20.0f);
+            transform.localScale = new Vector2(-1f, 1f);
         }
         else if(horizontal > 0.0f)
         {
-            transform.localScale = new Vector2(20.0f, 20.0f);
+            transform.localScale = new Vector2(1f, 1f);
         }
 
         animator.SetBool("isRunning", horizontal != 0.0f);
@@ -43,6 +46,7 @@ public class Player : MonoBehaviour
         if (Physics2D.Raycast(transform.position, Vector2.down, 1.1f))
         {
             isGrounded = true;
+            animator.SetBool("isJumping", false);
         }
         else
         {
@@ -53,15 +57,29 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
+
+        DeathOnFall();
     }
 
     private void Jump()
     {
+        animator.SetBool("isJumping", true);
         rigidBody2D.AddForce(Vector2.up * jumpForce);
     }
 
     private void FixedUpdate()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2(horizontal, GetComponent<Rigidbody2D>().velocity.y);
+    }
+
+    private void DeathOnFall()
+    {
+        if(transform.position.y < -10){
+            transform.position = initialPosition;
+        }
+    }
+
+    public void Death(){
+        transform.position = initialPosition;
     }
 }
