@@ -1120,9 +1120,13 @@ MonoBehaviour:
   level: 1
   winSpot: {fileID: 1243949458}
   player: {fileID: 821445224}
+<<<<<<< HEAD
   checkPoints:
   - {fileID: 643983061}
   - {fileID: 396058488}
+=======
+  checkPoints: []
+>>>>>>> abfa3a2c851bbf4b420588a95dfa1fa637b2c385
   isFinal: 0
 --- !u!4 &958063364
 Transform:
