@@ -809,7 +809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 2
   speed: 10
-  jumpForce: 400
+  jumpForce: 500
   bulletPrefab: {fileID: 7989274911230493988, guid: 94a5b9ea02c4cd9499b8c2d8d0ece531, type: 3}
   lifesPanel: {fileID: 1848782080}
   respawnpoint: {x: 0, y: 0}
